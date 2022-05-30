@@ -1,8 +1,8 @@
 pipeline {
-    agent any 
+  agent any 
   parameters {
     
-    choice(name: "TF-action",                choices: ["apply","destroy"],    description: "Select the /tf action")
+    choice(name: "TF", choices: ["apply","destroy"],    description: "Select the /tf action")
 
   }
     stages {
@@ -27,7 +27,8 @@ pipeline {
         stage (" Action") {
             steps {
                 echo "Terraform action is --> creating eks"
-              sh ('terraform  ${TF-action} --auto-approve') 
+              sh 'terraform ${TF} --auto-approve'
+              sh 'terraform state list'
            }
      
         }
