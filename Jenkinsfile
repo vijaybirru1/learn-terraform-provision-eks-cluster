@@ -2,7 +2,7 @@ pipeline {
   agent any 
   parameters {
     
-    choice(name: "TF", choices: ["plan","apply","destroy"],    description: "Select the /tf action")
+    choice(name: "TF", choices: ["apply","destroy"],    description: "Select the /tf action")
 
   }
     stages {
@@ -15,6 +15,11 @@ pipeline {
         stage ("terraform init") {
             steps {
                 sh ("terraform init -reconfigure") 
+            }
+        }
+         stage ("terraform plan") {
+            steps {
+                sh ("terraform plan") 
             }
         }
         
